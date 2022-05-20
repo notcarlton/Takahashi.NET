@@ -1,0 +1,13 @@
+Takahashi.NET
+
+minimal presentation tool written in C# using .NET 6
+
+presentations are stored in plain text files, like this one
+one paragraph per slide
+empty slides are interpreted as !, like this following one
+
+!
+
+inspiration was taken from "sent" by the suckless community
+
+thank you
