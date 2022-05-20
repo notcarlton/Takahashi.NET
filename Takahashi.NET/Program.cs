@@ -28,7 +28,7 @@ namespace Takahashi.NET
             if (TTF_Init() < 0) return;
 
             Window = SDL_CreateWindow(
-                "Takahashi", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN);
+                "Takahashi", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
             SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
             
@@ -55,7 +55,7 @@ namespace Takahashi.NET
                             quit = true;
                         }
 
-                        if (e.key.keysym.sym == SDLK_SPACE || e.key.keysym.sym == SDLK_RETURN || e.key.keysym.sym == SDLK_UP)
+                        if (e.key.keysym.sym == SDLK_SPACE || e.key.keysym.sym == SDLK_RETURN || e.key.keysym.sym == SDLK_RIGHT)
                         {
                             _currentSlide = _slides[(_slides.IndexOf(_currentSlide) + 1) % _slides.Count];
                         }

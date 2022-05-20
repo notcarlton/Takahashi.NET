@@ -10,7 +10,7 @@ namespace Takahashi.NET
 
         public static void Init()
         {
-            Font = TTF_OpenFont("NotoSans-Regular.ttf", 24);
+            Font = TTF_OpenFont("NotoSans-Regular.ttf", 40);
             White = new()
             {
                 r = 255,
@@ -26,7 +26,7 @@ namespace Takahashi.NET
             var text = File.ReadAllText(filename);
 
             // separate slides by double newlines to allow for multiple paragraphs in a slide
-            var lines = text.Split(new[] { "\r\n\r\n" }, StringSplitOptions.None);
+            var lines = text.Split(new[] { "\n\n" }, StringSplitOptions.None);
             foreach (var line in lines)
             {
                 if (line == "!") // empty slide
@@ -41,11 +41,14 @@ namespace Takahashi.NET
             return slides;
         }
 
-        public static uint GetScreenWidth()
+        public static SDL_Rect GetDisplayRect()
         {
-            SDL_GetWindowSize(Program.Window, out var w, out _);
-    
-            return (uint)w;
+            if (SDL_GetDisplayBounds(0, out var rect) < 0)
+            {
+                return new();
+            }
+
+            return rect;
         }
     }
 }
