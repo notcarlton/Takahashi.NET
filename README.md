@@ -4,8 +4,8 @@ the [Takahashi method](https://en.wikipedia.org/wiki/Takahashi_method) in C#
 Inspiration taken from [*sent*](https://tools.suckless.org/sent/) by the suckless community.
 
 ## What you need
-* SDL2 binaries
-* .NET 6 SDK
+* [SDL2 development libraries](https://www.libsdl.org/download-2.0.php)
+* [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download)
 * a text editor, obviously
 
 ## How it works
