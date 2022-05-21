@@ -18,17 +18,31 @@ namespace Takahashi.NET
 
         private static void Main(string[] args)
         {
-            if (args.Length != 1 && !File.Exists(args[0]))
+            if (args.Length == 0 || !File.Exists(args[0]) || args.Length >= 3)
             {
-                Console.WriteLine("usage: takahashi <file>");
+                Console.WriteLine("usage: takahashi <file> [--windowed]");
+                return;
+            }
+
+            if (args.Length == 2 && args[1] != "--windowed")
+            {
+                Console.WriteLine("usage: takahashi <file> [--windowed]");
                 return;
             }
 
             if (SDL_Init(SDL_INIT_VIDEO) < 0) return;
             if (TTF_Init() < 0) return;
 
-            Window = SDL_CreateWindow(
-                "Takahashi", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP);
+            if (args.Length == 2 && args[1] == "--windowed")
+            {
+                Window = SDL_CreateWindow("Takahashi", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                    1280, 720, SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
+            }
+            else
+            {
+                Window = SDL_CreateWindow("Takahashi", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+                    0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP);
+            }
 
             SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
             
@@ -55,7 +69,8 @@ namespace Takahashi.NET
                             quit = true;
                         }
 
-                        if (e.key.keysym.sym == SDLK_SPACE || e.key.keysym.sym == SDLK_RETURN || e.key.keysym.sym == SDLK_RIGHT)
+                        if (e.key.keysym.sym == SDLK_SPACE || 
+                            e.key.keysym.sym == SDLK_RETURN || e.key.keysym.sym == SDLK_RIGHT)
                         {
                             _currentSlide = _slides[(_slides.IndexOf(_currentSlide) + 1) % _slides.Count];
                         }

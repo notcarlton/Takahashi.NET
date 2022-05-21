@@ -52,6 +52,30 @@ namespace Takahashi.NET
         {
             if (Text == "") return;
 
+            var lines = Text.Split('\n');
+            var biggestWidth = 0;
+            foreach (var line in lines)
+            {
+                var surface = TTF_RenderText_Blended_Wrapped(Util.Font, line, Util.White, (uint)Util.GetDisplayRect().w - 20);
+                var textTexture = SDL_CreateTextureFromSurface(Program.Renderer, surface);
+                SDL_QueryTexture(textTexture, out _, out _, out var width, out _);
+                SDL_FreeSurface(surface);
+                SDL_DestroyTexture(textTexture);
+
+                if (width > biggestWidth)
+                {
+                    biggestWidth = width;
+                }
+            }
+
+            _rect2.w = biggestWidth;
+
+            // center the text
+            _rect.x = Util.GetDisplayRect().w / 2 - _rect2.w / 2;
+            _rect.y = Util.GetDisplayRect().h / 2 - _rect2.h / 2;
+            _rect.w = _rect2.w;
+            _rect.h = _rect2.h;
+
             SDL_RenderCopy(Program.Renderer, _textTexture, ref _rect2, ref _rect);
         }
     }

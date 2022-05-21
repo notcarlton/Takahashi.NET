@@ -43,10 +43,9 @@ namespace Takahashi.NET
 
         public static SDL_Rect GetDisplayRect()
         {
-            if (SDL_GetDisplayBounds(0, out var rect) < 0)
-            {
-                return new();
-            }
+            var rect = new SDL_Rect();
+
+            SDL_GetWindowSize(Program.Window, out rect.w, out rect.h);
 
             return rect;
         }
