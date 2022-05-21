@@ -3,6 +3,11 @@ the [Takahashi method](https://en.wikipedia.org/wiki/Takahashi_method) in C#
 
 Inspiration taken from [*sent*](https://tools.suckless.org/sent/) by the suckless community.
 
+## What you need
+* SDL2 binaries
+* .NET 6 SDK
+* a text editor, obviously
+
 ## How it works
 Presentations are created with a plain text file that you can edit in any text editor.
 
