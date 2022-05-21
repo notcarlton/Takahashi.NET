@@ -62,6 +62,14 @@ namespace Takahashi.NET
                         quit = true;
                     }
 
+                    if (e.type == SDL_MOUSEBUTTONDOWN)
+                    {
+                        if (e.button.button == SDL_BUTTON_LEFT)
+                        {
+                            _currentSlide = _slides[(_slides.IndexOf(_currentSlide) + 1) % _slides.Count];
+                        }
+                    }
+
                     if (e.type == SDL_KEYDOWN)
                     {
                         if (e.key.keysym.sym == SDLK_ESCAPE)
